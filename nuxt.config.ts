@@ -5,6 +5,15 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   modules: ['nuxt-mcp'],
   devtools: { enabled: true },
+  
+  // Disable SSR for GitHub Pages deployment
+  ssr: false,
+  
+  // Configure for static generation
+  nitro: {
+    preset: 'static'
+  },
+  
   typescript: {
     strict: true,
     typeCheck: true
