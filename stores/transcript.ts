@@ -38,7 +38,7 @@ export const useTranscriptStore = defineStore('transcript', () => {
   
   const getCurrentSubtitle = (currentTime: number) => {
     const activeSentence = sentences.value.find(
-      s => s.isSelected && currentTime >= s.start && currentTime <= s.end
+      s => currentTime >= s.start && currentTime <= s.end
     )
     return activeSentence ? activeSentence.text : ''
   }

@@ -278,8 +278,7 @@ const handleProcessingComplete = (payload: { videoUrl: string; duration?: number
           <!-- 字幕覆蓋層 -->
           <div 
             v-if="transcriptStore.getCurrentSubtitle(videoStore.currentTime)" 
-            class="absolute bottom-2 left-1/2 -translate-x-1/2 w-11/12 text-center text-xs font-bold text-white px-2 py-1 bg-black/70 rounded"
-            style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);"
+            class="text-shadow-[1px_1px_2px_rgba(0,0,0,0.8)] absolute bottom-2 left-1/2 -translate-x-1/2 w-11/12 text-center text-xs font-bold text-white px-2 py-1 bg-black/70 rounded"
           >
             {{ transcriptStore.getCurrentSubtitle(videoStore.currentTime) }}
           </div>
