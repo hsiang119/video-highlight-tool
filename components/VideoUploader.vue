@@ -87,7 +87,7 @@ const handleDrop = async (event: DragEvent) => {
           
           <!-- 支援格式 -->
           <p class="text-xs text-text-tertiary mt-4">
-            支援 MP4、WebM、MOV 格式
+            支援 MP4、WebM、MOV 格式 (建議上傳大於 00:01:10 的影片)
           </p>
 
       </div>

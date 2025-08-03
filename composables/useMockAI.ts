@@ -34,7 +34,7 @@ const MOCK_SECTIONS: Section[] = [
   }
 ];
 
-const MOCK_SUGGESTED_HIGHLIGHTS: string[] = ['s2', 's8', 's9', 's11'];
+const MOCK_SUGGESTED_HIGHLIGHTS: string[] = [''];
 
 export const useMockAI = () => {
   const processMockAI = async (params: {
