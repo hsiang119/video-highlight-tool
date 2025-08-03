@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 手機底部安全區域 (iPhone Home Indicator) */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
 /* 拖拽时的全局样式 */
 .dragging-cursor {
   cursor: col-resize !important;
@@ -10,8 +15,6 @@
 .dragging-cursor * {
   cursor: col-resize !important;
 }
-
-/* 可拖拽面板样式 - 現在使用 flexbox 佈局，不需要這些樣式了 */
 
 /* Vue transition 過渡效果 */
 .fade-enter-active,
