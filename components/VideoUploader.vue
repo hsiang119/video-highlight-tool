@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Nuxt 3 auto-imports - ref 會自動引入
 import type { AiProcessingResult } from '~/types';
 
 // 定義事件，用於通知父元件處理完成
@@ -10,7 +9,9 @@ const emit = defineEmits<{
 const isProcessing = ref(false);
 const errorMessage = ref<string | null>(null);
 
-// 統一的檔案處理函式
+// 使用客戶端 mock AI composable
+const { processMockAI } = useMockAI();
+
 const processVideoFile = async (file: File) => {
   if (!file) return;
 
@@ -23,14 +24,10 @@ const processVideoFile = async (file: File) => {
 
   videoElement.onloadedmetadata = async () => {
     try {
-      // 使用 Nuxt 3 的 useRuntimeConfig 和 $fetch
-      const config = useRuntimeConfig()
-      const aiResult = await $fetch<AiProcessingResult>(`${config.public.apiBase}/mock-ai`, {
-        method: 'POST',
-        body: {
-          duration: videoElement.duration,
-          fileName: file.name,
-        },
+      // 使用 composable 而不是 API 調用
+      const aiResult = await processMockAI({
+        duration: videoElement.duration,
+        fileName: file.name,
       });
       
       emit('processingComplete', { videoUrl, duration: videoElement.duration, ...aiResult });

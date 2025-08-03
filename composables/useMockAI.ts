@@ -1,7 +1,4 @@
-// Nuxt 3 auto-imports defineEventHandler
 import type { Sentence, Section, AiProcessingResult } from '~/types';
-
-// --- 基於圖片內容的靜態 Mock Data ---
 
 const MOCK_TRANSCRIPT: Sentence[] = [
   { id: 's1', start: 0, end: 4, text: 'Welcome to our product demonstration.' },
@@ -19,35 +16,42 @@ const MOCK_TRANSCRIPT: Sentence[] = [
 ];
 
 const MOCK_SECTIONS: Section[] = [
-    {
-        title: 'Introduction',
-        sentence_ids: ['s1', 's2']
-    },
-    {
-        title: 'Key Features',
-        sentence_ids: ['s3', 's4', 's5', 's6']
-    },
-    {
-        title: 'Demonstration',
-        sentence_ids: ['s7', 's8', 's9']
-    },
-    {
-        title: 'Conclusion',
-        sentence_ids: ['s10', 's11', 's12']
-    }
+  {
+    title: 'Introduction',
+    sentence_ids: ['s1', 's2']
+  },
+  {
+    title: 'Key Features',
+    sentence_ids: ['s3', 's4', 's5', 's6']
+  },
+  {
+    title: 'Demonstration',
+    sentence_ids: ['s7', 's8', 's9']
+  },
+  {
+    title: 'Conclusion',
+    sentence_ids: ['s10', 's11', 's12']
+  }
 ];
 
-// 預設不選中任何句子 (使用者需要手動選擇)
-const MOCK_SUGGESTED_HIGHLIGHTS: string[] = [];
+const MOCK_SUGGESTED_HIGHLIGHTS: string[] = ['s2', 's8', 's9', 's11'];
 
-
-export default defineEventHandler(async (event): Promise<AiProcessingResult> => {
-  // 模擬非同步處理延遲
-  await new Promise(resolve => setTimeout(resolve, 1000));
+export const useMockAI = () => {
+  const processMockAI = async (params: {
+    duration: number;
+    fileName: string;
+  }): Promise<AiProcessingResult> => {
+    // 模擬處理延遲
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    return {
+      fullTranscript: MOCK_TRANSCRIPT,
+      sections: MOCK_SECTIONS,
+      suggestedHighlights: MOCK_SUGGESTED_HIGHLIGHTS,
+    };
+  };
 
   return {
-    fullTranscript: MOCK_TRANSCRIPT,
-    sections: MOCK_SECTIONS,
-    suggestedHighlights: MOCK_SUGGESTED_HIGHLIGHTS,
+    processMockAI
   };
-});
+};

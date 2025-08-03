@@ -24,13 +24,12 @@ export default defineNuxtConfig({
     
     // 公開配置（客戶端和伺服器端都可用）
     public: {
-      apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
       appVersion: '1.0.0'
     }
   },
   app: {
     // Set base URL based on environment (use NUXT_APP_BASE_URL in GitHub Actions)
-    baseURL: process.env.NUXT_APP_BASE_URL || (process.env.NODE_ENV === 'production' ? '/video-highlight-tool-vue/' : '/'),
+    baseURL: process.env.NUXT_APP_BASE_URL || (process.env.NODE_ENV === 'production' ? '/video-highlight-tool/' : '/'),
     buildAssetsDir: 'assets',
     head: {
       htmlAttrs: {
