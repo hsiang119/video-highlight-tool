@@ -9,6 +9,7 @@ export const useVideoStore = defineStore('video', () => {
   const isPlayingHighlights = ref(false)
   const currentClipIndex = ref(0)
   const seekToTime = ref<number | null>(null)
+  const playbackRate = ref(1)
 
   // Getters
   const hasVideo = computed(() => !!videoUrl.value)
@@ -50,6 +51,10 @@ export const useVideoStore = defineStore('video', () => {
     }, 50)
   }
   
+  function setPlaybackRate(rate: number) {
+    playbackRate.value = rate
+  }
+  
   function reset() {
     videoUrl.value = null
     currentTime.value = 0
@@ -58,6 +63,7 @@ export const useVideoStore = defineStore('video', () => {
     isPlayingHighlights.value = false
     currentClipIndex.value = 0
     seekToTime.value = null
+    playbackRate.value = 1
   }
 
   // Return everything we want to expose
@@ -70,6 +76,7 @@ export const useVideoStore = defineStore('video', () => {
     isPlayingHighlights: readonly(isPlayingHighlights),
     currentClipIndex: readonly(currentClipIndex),
     seekToTime: readonly(seekToTime),
+    playbackRate: readonly(playbackRate),
     
     // Getters
     hasVideo,
@@ -83,6 +90,7 @@ export const useVideoStore = defineStore('video', () => {
     setPlayingHighlights,
     setCurrentClipIndex,
     requestSeek,
+    setPlaybackRate,
     reset
   }
 })
