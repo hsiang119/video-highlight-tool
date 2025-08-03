@@ -7,9 +7,9 @@ export default defineNuxtConfig({
   // Disable SSR for GitHub Pages deployment
   ssr: false,
   
-  // Configure for static generation
+  // Configure for GitHub Pages deployment
   nitro: {
-    preset: 'static'
+    preset: 'github_pages'
   },
   
   typescript: {
@@ -29,7 +29,9 @@ export default defineNuxtConfig({
     }
   },
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/video-highlight-tool/' : '/',
+    // Set base URL based on environment (use NUXT_APP_BASE_URL in GitHub Actions)
+    baseURL: process.env.NUXT_APP_BASE_URL || (process.env.NODE_ENV === 'production' ? '/video-highlight-tool-vue/' : '/'),
+    buildAssetsDir: 'assets',
     head: {
       htmlAttrs: {
         'data-theme': 'dark'
