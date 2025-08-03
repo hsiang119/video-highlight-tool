@@ -1,75 +1,48 @@
-# video-highlight-tool
+# Video Highlight Tool
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+### Core Technology Stack
 
-## Setup
+| Technology | Version | Purpose |
+|------|------|------|
+| **[Nuxt 3](https://nuxt.com/)** | `^3.17.6` | Vue 3 meta-framework providing file-based routing, SSR/SSG, auto-imports, and more |
+| **[Vue 3](https://vuejs.org/)** | `^3.5.17` | Progressive frontend framework using Composition API |
+| **[TypeScript](https://www.typescriptlang.org/)** | `^5.8.3` | Static type checking for improved code quality |
+| **[Pinia](https://pinia.vuejs.org/)** | `^3.0.3` | Official Vue 3 state management solution |
+| **[Tailwind CSS](https://tailwindcss.com/)** | `^6.14.0` | Utility-first CSS framework |
+| **[daisyUI](https://daisyui.com/)** | `^5.0.46` | Tailwind CSS component library |
 
-Make sure to install dependencies:
+### Technology Selection Rationale
 
-```bash
-# npm
-npm install
+#### Why Nuxt 3?
 
-# pnpm
-pnpm install
+- **Excellent Developer Experience**: Built-in Vite provides lightning-fast development startup and hot module replacement
+- **Automation Features**: File-based routing, auto-imports for components and composables
+- **Flexible Deployment**: Supports SSR, SSG, SPA, and other rendering modes
+- **Performance Optimization**: Built-in code splitting, lazy loading, and prefetching strategies
+- **Nitro Engine**: High-performance server engine with edge computing deployment support
 
-# yarn
-yarn install
+#### Why TypeScript?
 
-# bun
-bun install
-```
+- **Type Safety**: Catches errors at compile-time, reducing runtime issues
+- **Development Efficiency**: Powerful IDE support, auto-completion, and refactoring tools
+- **Self-Documenting Code**: Type definitions serve as documentation, improving team collaboration
+- **Maintainability**: Essential for large-scale projects, reducing maintenance costs
 
-## Development Server
+#### Why Pinia?
 
-Start the development server on `http://localhost:3000`:
+- **Officially Recommended**: Vue 3's official state management solution
+- **TypeScript Support**: Native TypeScript support with perfect type inference
+- **DevTools Integration**: Excellent development tools support
+- **Modular Design**: Clean store architecture, easy to split and compose
 
-```bash
-# npm
-npm run dev
+#### Why Tailwind CSS + daisyUI?
 
-# pnpm
-pnpm dev
+- **Development Speed**: Write styles directly in templates without switching files
+- **Consistency**: Unified design system preventing style chaos
+- **Responsive Design**: Built-in responsive utility classes for easy adaptation
+- **daisyUI Enhancement**: Pre-built components accelerating UI development
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Future Extensions
+- If the video generation platform requires a component library in the future, we will use shadcn/nuxt + Tailwind CSS to create components. Shadcn provides component behavior and functionality, while styles are handled with Tailwind CSS
+- For complex pages in the future, we will implement additional Layout components as needed
+- Add **[nuxt-security](https://nuxt.com/modules/security)** library to address OWASP Top 10 security concerns
