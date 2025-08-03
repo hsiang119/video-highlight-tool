@@ -1,0 +1,46 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Local Nuxt modules
+.npmrc
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# Testing
+coverage
+
+# Temporary files
+tmp
+temp
+
+# Package lock files (optional, depends on preference)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+CLAUDE.local.md
+.claude
