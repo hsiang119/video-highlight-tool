@@ -4,6 +4,7 @@ const transcriptStore = useTranscriptStore();
 const videoStore = useVideoStore();
 
 const videoRef = ref<HTMLVideoElement | null>(null);
+const playbackRate = ref(1); // 播放速度
 
 // 使用 composable 處理影片播放邏輯
 const { playHighlights: playHighlightsComposable, handleHighlightTimeUpdate, isTransitioning } = useVideoPlayer(
@@ -13,6 +14,14 @@ const { playHighlights: playHighlightsComposable, handleHighlightTimeUpdate, isT
 
 // 計算當前應顯示的字幕
 const currentSubtitle = computed(() => transcriptStore.getCurrentSubtitle(videoStore.currentTime));
+
+// 處理播放速度變更
+const changePlaybackRate = (rate: number) => {
+  playbackRate.value = rate;
+  if (videoRef.value) {
+    videoRef.value.playbackRate = rate;
+  }
+};
 
 // 統一播放按鈕的邏輯
 const play = () => {
@@ -131,6 +140,9 @@ watch(() => videoStore.videoUrl, (newUrl) => {
 
 onMounted(() => {
   if (videoRef.value) {
+    // 設定初始播放速度
+    videoRef.value.playbackRate = playbackRate.value;
+    
     videoRef.value.addEventListener('timeupdate', handleTimeUpdate);
     // 監聽播放和暫停事件，確保按鈕狀態同步
     videoRef.value.addEventListener('play', () => videoStore.setPlaying(true));
@@ -143,6 +155,8 @@ onMounted(() => {
     videoRef.value.addEventListener('loadedmetadata', () => {
       if (videoRef.value) {
         videoStore.setDuration(videoRef.value.duration);
+        // 確保播放速度在影片載入後也被設定
+        videoRef.value.playbackRate = playbackRate.value;
       }
     });
   }
@@ -190,8 +204,7 @@ onUnmounted(() => {
       <!-- 字幕覆蓋層 -->
       <div 
         v-if="currentSubtitle" 
-        class="absolute bottom-4 left-1/2 -translate-x-1/2 w-11/12 text-center text-sm font-bold text-white px-3 py-1 bg-black/70 rounded-lg"
-        style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);"
+        class="text-shadow-[1px_1px_2px_rgba(0,0,0,0.8)] absolute bottom-10 left-1/2 -translate-x-1/2 w-10/12 text-center text-sm font-bold text-white px-3 py-1 bg-black/70 rounded-lg z-10"
       >
         {{ currentSubtitle }}
       </div>
@@ -206,10 +219,12 @@ onUnmounted(() => {
         :can-go-next="canGoNext"
         :current-time="videoStore.currentTime"
         :duration="videoStore.duration"
+        :playback-rate="playbackRate"
         @play="play"
         @pause="pause"
         @previous="previous"
         @next="next"
+        @change-speed="changePlaybackRate"
       />
       
       <!-- 進度條 -->

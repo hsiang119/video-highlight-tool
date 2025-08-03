@@ -6,6 +6,7 @@ const props = defineProps<{
   canGoNext: boolean;
   currentTime: number;
   duration: number;
+  playbackRate?: number;
 }>();
 
 // Emits
@@ -14,7 +15,40 @@ const emit = defineEmits<{
   pause: [];
   previous: [];
   next: [];
+  changeSpeed: [speed: number];
 }>();
+
+// 播放速度選項
+const speedOptions = [
+  { label: '0.25x', value: 0.25 },
+  { label: '0.5x', value: 0.5 },
+  { label: '0.75x', value: 0.75 },
+  { label: '1.0x', value: 1 },
+  { label: '1.25x', value: 1.25 },
+  { label: '1.5x', value: 1.5 },
+  { label: '2x', value: 2 },
+];
+
+// 當前播放速度
+const currentSpeed = computed(() => props.playbackRate || 1);
+
+// 取得當前速度的標籤
+const currentSpeedLabel = computed(() => {
+  const option = speedOptions.find(opt => opt.value === currentSpeed.value);
+  return option ? option.label : '1.0x';
+});
+
+// Dropdown 的 ref
+const dropdownRef = ref<HTMLDetailsElement | null>(null);
+
+// 處理速度變更
+const handleSpeedChange = (speed: number) => {
+  emit('changeSpeed', speed);
+  // 關閉 dropdown
+  if (dropdownRef.value) {
+    dropdownRef.value.removeAttribute('open');
+  }
+};
 
 // 格式化時間
 const formatTime = (time: number): string => {
@@ -62,9 +96,31 @@ const formatTime = (time: number): string => {
       </button>
     </div>
     
-    <!-- 時間顯示 -->
-    <div class="text-white text-sm font-mono">
-      {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
+    <!-- 速度控制和時間顯示 -->
+    <div class="flex items-center gap-4">
+      <!-- 播放速度選擇器 -->
+      <details ref="dropdownRef" class="dropdown dropdown-top dropdown-end">
+        <summary class="btn btn-xs btn-ghost text-white hover:bg-slate-700 gap-1">
+          <Icon name="mdi:speedometer" class="w-4 h-4" />
+          <span>{{ currentSpeedLabel }}</span>
+        </summary>
+        <ul class="dropdown-content menu p-1 shadow bg-slate-700 rounded-box w-28 mb-2 z-50">
+          <li v-for="option in speedOptions" :key="option.value">
+            <button 
+              @click="handleSpeedChange(option.value)"
+              :class="{ 'active bg-primary': currentSpeed === option.value }"
+              class="text-white text-sm py-1 hover:bg-slate-500 w-full text-left"
+            >
+              {{ option.label }}
+            </button>
+          </li>
+        </ul>
+      </details>
+      
+      <!-- 時間顯示 -->
+      <div class="text-white text-sm font-mono">
+        {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
+      </div>
     </div>
   </div>
 </template>
