@@ -1,4 +1,4 @@
-import { defineEventHandler } from 'h3';
+// Nuxt 3 auto-imports defineEventHandler
 import type { Sentence, Section, AiProcessingResult } from '~/types';
 
 // --- 基於圖片內容的靜態 Mock Data ---
@@ -37,7 +37,7 @@ const MOCK_SECTIONS: Section[] = [
     }
 ];
 
-// 不預設選中任何句子
+// 預設不選中任何句子 (使用者需要手動選擇)
 const MOCK_SUGGESTED_HIGHLIGHTS: string[] = [];
 
 
