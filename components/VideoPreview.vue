@@ -204,7 +204,7 @@ onUnmounted(() => {
       <!-- 字幕覆蓋層 -->
       <div 
         v-if="currentSubtitle" 
-        class="text-shadow-[1px_1px_2px_rgba(0,0,0,0.8)] absolute bottom-10 left-1/2 -translate-x-1/2 w-10/12 text-center text-sm font-bold text-white px-3 py-1 bg-black/70 rounded-lg z-10"
+        class="text-shadow-[1px_1px_2px_rgba(0,0,0,0.8)] absolute bottom-5 left-1/2 -translate-x-1/2 w-10/12 text-center text-sm font-bold text-white px-3 py-1 bg-black/70 rounded-lg z-10"
       >
         {{ currentSubtitle }}
       </div>
